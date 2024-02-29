@@ -4,11 +4,15 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
+	"net/http"
 	"os"
 	"time"
 	sqlc "todolist/pkg/db"
+	"todolist/pkg/model"
 
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/jackc/pgx/v5"
+	"github.com/labstack/echo/v4"
 )
 
 const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -40,4 +44,22 @@ func NewSalt() string {
 		b[i] = charset[seededRand.Intn(len(charset))]
 	}
 	return string(b)
+}
+
+func LoginWithMessage(message string, c echo.Context) error {
+	return c.Render(http.StatusOK, "login", model.Login{Message: message})
+}
+
+func SignupWithMessage(message string, c echo.Context) error {
+	return c.Render(http.StatusOK, "register", model.Login{Message: message})
+}
+
+func GetSessionUser(c echo.Context) model.SessionUser {
+	user := c.Get("user").(*jwt.Token)
+	claims := user.Claims.(*model.JwtCustomClaims)
+
+	return model.SessionUser{
+		Username: claims.Username,
+		Id:       claims.Id,
+	}
 }
