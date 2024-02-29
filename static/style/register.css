@@ -1,0 +1,19 @@
+body {
+    background: var(--red);
+}
+
+.window {
+    background: var(--orange);
+}
+
+button {
+    background: var(--teal);
+}
+
+input {
+    background: var(--beige);
+}
+
+button:hover {
+    background: var(--teal2);
+}

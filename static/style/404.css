@@ -1,0 +1,18 @@
+body {
+    background: var(--sky);
+}
+
+#content {
+    width: 100vi;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+}
+
+img {
+    width: 388px;
+}

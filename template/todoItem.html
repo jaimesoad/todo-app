@@ -1,0 +1,9 @@
+<span id="new-todo"></span>
+
+<div class="list-item" id="todo-{{.ID}}">
+    <p>{{.Content}}</p>
+    <div class="mod">
+        <a href="/todo/{{.ID}}" hx-put="/todo/{{.ID}}">mark as done</a>
+        <a href="/todo/{{.ID}}" hx-delete="/todo/{{.ID}}" hx-target="#todo-{{.ID}}" hx-swap="outerHTML">Delete</a>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/assets/post-it.png">
+    <link rel="stylesheet" href="/static/style/style.css">
+    <link rel="stylesheet" href="/static/style/home.css">
+
+    <!-- HTMX Support -->
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <script defer src="/static/script/resize.js"></script>
+    <script defer src="/static/script/window.js"></script>
+    <title>Home</title>
+</head>
+
+<body>
+    <header>
+        <div id="menu">
+            <img src="/static/assets/block.png" alt="" id="logo">
+            <p>Home</p>
+            <a href="/logout">log out</a>
+        </div>
+
+        <p id="clock">time</p>
+    </header>
+    <section id="desktop">
+        <section class="window" id="window">
+            <div id="topbar">
+                <p>Welcome, {{.Username}}</p>
+            </div>
+
+            <div id="content">
+                <h2>Write something</h2>
+                <form>
+                    <input name="content" type="text" placeholder="new todo" autocomplete="off"><br><br>
+                    <button hx-post="/todo" hx-target="#new-todo" hx-swap="outerHTML">Add todo</button>
+                </form>
+                <div id="list">
+                    <span id="new-todo"></span>
+                    {{range $todo := .TodoList}}
+                        {{$todo}}
+                    {{end}}
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <script>
+        for (let color of ["red", "yellow", "green"]) {
+            const btn = document.createElement("div")
+            btn.className = `btn ${color}`
+            topbar.appendChild(btn)
+        }
+
+        const clock = document.getElementById("clock")
+        const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
+        const months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"]
+
+        function currentTime() {
+            let date = new Date();
+            let day = days[date.getDay()]
+            let month = months[date.getMonth()]
+            let nn = date.getDate()
+            let hh = date.getHours();
+            let mm = date.getMinutes();
+            let session = hh / 12 < 0 ? "AM" : "PM";
+
+            if (hh == 0) {
+                hh = 12;
+
+            } else if (hh > 12) {
+                hh -= 12
+            }
+
+            hh = (hh < 10) ? "0" + hh : hh;
+            mm = (mm < 10) ? "0" + mm : mm;
+
+            let time = `${day} ${month} ${nn} ${hh}:${mm} ${session}`
+
+            clock.innerText = time;
+            let t = setTimeout(currentTime, 1000);
+        }
+
+        currentTime()
+    </script>
+</body>
+
+</html>

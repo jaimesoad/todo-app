@@ -1,0 +1,7 @@
+body {
+    background: var(--sky);
+}
+
+.window {
+    background: var(--light-turq);
+}

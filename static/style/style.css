@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+:root {
+    --grey: #3D3B40;
+    --blue: #525CEB;
+    --sky: #BFCFE7;
+    --white: #F8EDFF;
+
+    --teal: #3AA6B9;
+    --baby-pink: #FFD0D0;
+    --pink: #FF9EAA;
+    --light-turq: #C1ECE4;
+
+    --pale-yellow: #F9F2ED;
+    --light-blue: #3AB0FF;
+    --orange: #FFB562;
+    --salmon: #F87474;
+
+    --black: #4D455D;
+    --red: #E96479;
+    --beige: #F5E9CF;
+    --teal2: #7DB9B6;
+
+    --navy: #0C2D57;
+    --orange2: #FC6736;
+    --peach: #FFB0B0;
+    --grey2: #EFECEC;
+
+    --white2: #F3F8FF;
+    --pink2: #E26EE5;
+    --purple: #7E30E1;
+    --indigo: #49108B;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: "Silkscreen", sans-serif;
+    cursor: url("/static/assets/mouse/pointer.png"), auto;
+    scrollbar-width: none;
+}
+
+input {
+    cursor: url("/static/assets/mouse/text.png"), auto;
+}
+
+body {
+    overflow: hidden;
+    height: 100vh;
+}
+
+.window {
+    /* max-width: 60rem;
+    max-height: 35rem;
+    min-width: 30rem;
+    min-height: 15rem; */
+
+    width: 60rem;
+    height: 35rem;
+
+    box-shadow: black 5px 5px;
+    border: 2px solid black;
+    position: absolute;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+#topbar {
+    height: 2.5rem;
+    background: var(--grey);
+    border-bottom: 2px solid black;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px;
+    position: relative;
+    color: var(--white);
+    user-select: none;
+    width: calc(100% - 10px);
+}
+
+.btn {
+    width: 10px;
+    height: 10px;
+}
+
+.red {
+    background: rgb(255, 55, 0);
+}
+
+.yellow {
+    background: rgb(234, 181, 47);
+}
+
+.green {
+    background: rgb(61, 193, 61);
+}
+
+#topbar p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+.corner {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.top-left {
+    top: -10px;
+    left: -10px;
+    cursor: url("/static/assets/mouse/nwse-resize.png"), auto;
+}
+
+.top-right {
+    top: -10px;
+    right: -10px;
+    cursor: url("/static/assets/mouse/nesw-resize.png"), auto;
+}
+
+.bottom-left {
+    bottom: -10px;
+    left: -10px;
+    cursor: url("/static/assets/mouse/nesw-resize.png"), auto;
+}
+
+.bottom-right {
+    bottom: -10px;
+    right: -10px;
+    cursor: url("/static/assets/mouse/nwse-resize.png"), auto;
+}
+
+#content {
+    height: calc(100% - 2.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+form {
+    width: fit-content;
+}
+
+input {
+    border: 2px solid black;
+    box-shadow: black 3px 3px;
+    font-size: 12pt;
+    outline: none;
+    background: var(--pale-yellow);
+}
+
+button {
+    width: 100%;
+    border: 2px solid black;
+    box-shadow: black 3px 3px;
+    background-color: var(--pink);
+    position: relative;
+    font-size: 12pt;
+}
+
+button:hover {
+    background: var(--baby-pink);
+}
+
+button:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+a {
+    color: var(--blue);
+    font-size: 12pt;
+    cursor: url("/static/assets/mouse/select.png"), auto;
+}
+
+a:hover {
+    color: var(--light-blue);
+}
+
+img {
+    image-rendering: pixelated;
+}
+
+.error {
+    color: var(--red);
+    text-decoration: underline;
+}
+
+#desktop {
+    overflow: hidden;
+    height: 100vh;
+}

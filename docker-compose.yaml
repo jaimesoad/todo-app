@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: psql
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '5432:5432'
+
+  app:
+    build: .
+    environment:
+      DBHOST: ${DBHOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      SECRET: ${SECRET}
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db

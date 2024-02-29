@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/assets/post-it.png">
+    <link rel="stylesheet" href="/static/style/style.css">
+    <link rel="stylesheet" href="/static/style/login.css">
+    <script defer src="/static/script/main.js"></script>
+    <script defer src="/static/script/resize.js"></script>
+    <script defer src="/static/script/window.js"></script>
+    <title>Login Page</title>
+</head>
+
+<body>
+    <section class="window" id="window">
+        <div id="topbar">
+            <div class="btn red"></div>
+            <div class="btn yellow"></div>
+            <div class="btn green"></div>
+            <p>Login Page</p>
+        </div>
+        <div id="content">
+            <h1>Welcome!</h1>
+            <form action="/login" method="post">
+                <input name="username" type="text" placeholder="username" autocomplete="off"> <br><br>
+                <input name="passwd" type="password" placeholder="password"> <br><br>
+                <button type="">Login</button>
+            </form>
+            <p>Don't have an account?: <a href="/signup">register</a></p>
+            <p class="error">{{.Message}}</p>
+        </div>
+    </section>
+</body>
+
+</html>

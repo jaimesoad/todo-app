@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/assets/post-it.png">
+    <link rel="stylesheet" href="/static/style/style.css">
+    <link rel="stylesheet" href="/static/style/404.css">
+    <title>Page not Found</title>
+</head>
+<body>
+    <section id="content">
+        <h1>Page Not Found</h1>
+        <p>We couldn't find what you are looking for :(</p>
+        <img src="/static/assets/sockets.png" alt="">
+    </section>
+
+    <script>
+        const body = document.querySelector("body")
+
+        const colors = ["orange", "teal", "salmon", "beige", "red", "pink", "light-blue", "sky"]
+
+        const randomIdx = Math.floor(Math.random() * colors.length)
+        body.style.background = `var(--${colors[randomIdx]})`
+    </script>
+</body>
+</html>
