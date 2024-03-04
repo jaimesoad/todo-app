@@ -10,12 +10,14 @@ import (
 func GetLogout(c echo.Context) error {
 	cookie, err := c.Cookie("token")
 	if err != nil {
-		c.Redirect(http.StatusBadRequest, "/login")
+		return c.Redirect(http.StatusFound, "/login")
 	}
 
-	cookie.Expires = time.Now()
+	cookie.Value = ""
+	cookie.Expires = time.Now().AddDate(0, 0, -1)
+	cookie.Path = "/"
 
 	c.SetCookie(cookie)
 
-	return c.Redirect(http.StatusPermanentRedirect, "/login")
+	return c.Redirect(http.StatusFound, "/login")
 }
