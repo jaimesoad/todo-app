@@ -12,6 +12,7 @@ create table Todos (
     user_id integer not null,
     foreign key (user_id) references Users (id)
 );
+create index user_todo on Todos (id, user_id);
 
 create view Users_View as
 select id, username
