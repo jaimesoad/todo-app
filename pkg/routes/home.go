@@ -12,8 +12,9 @@ import (
 
 func GetHome(c echo.Context) error {
 	user := util.GetSessionUser(c)
+	q, ctx := util.GetDBSession(c)
 
-	todos, err := global.Q.GetUserTodos(global.Ctx, user.Id)
+	todos, err := q.GetUserTodos(ctx, user.Id)
 	if err != nil {
 		return c.NoContent(http.StatusInternalServerError)
 	}

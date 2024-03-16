@@ -7,6 +7,7 @@ import (
 	"os"
 	"text/template"
 	"todolist/pkg/global"
+	mid "todolist/pkg/middleware"
 	"todolist/pkg/model"
 	"todolist/pkg/routes"
 	"todolist/pkg/util"
@@ -22,11 +23,16 @@ var schema string
 
 func main() {
 	godotenv.Load()
-	global.Ctx, global.Q = util.NewPgx(schema)
+	ctx, q := util.NewPgx(schema)
 
 	global.SecretKey = []byte(os.Getenv("SECRET"))
 
 	e := echo.New()
+
+	e.Use(mid.WithDBConfig(mid.DBConfig{
+		Conn: q,
+		Ctx: ctx,
+	}))
 
 	e.Renderer = &model.Templates{
 		Templates: template.Must(template.ParseGlob("template/*.html")),

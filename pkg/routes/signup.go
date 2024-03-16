@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"strings"
 	sqlc "todolist/pkg/db"
-	"todolist/pkg/global"
 	"todolist/pkg/util"
 
 	"github.com/labstack/echo/v4"
@@ -24,7 +23,9 @@ func PostRegister(c echo.Context) error {
 	credentials.Passwd = []byte(c.FormValue("passwd"))
 	confirm = c.FormValue("confirm")
 
-	_, err := global.Q.GetUserData(global.Ctx, credentials.Username)
+	q, ctx := util.GetDBSession(c)
+
+	_, err := q.GetUserData(ctx, credentials.Username)
 	if err == nil {
 		return util.SignupWithMessage(fmt.Sprintf("User: \"%s\" already exists", credentials.Username), c)
 	}
@@ -47,7 +48,7 @@ func PostRegister(c echo.Context) error {
 
 	credentials.Passwd = hashedPasswd[:]
 
-	err = global.Q.NewUser(global.Ctx, credentials)
+	err = q.NewUser(ctx, credentials)
 	if err != nil {
 		return util.SignupWithMessage("An error occured. User not created", c)
 	}

@@ -24,7 +24,9 @@ func PostTodo(c echo.Context) error {
 		return c.NoContent(http.StatusBadRequest)
 	}
 
-	newTodo, err := global.Q.NewTodo(global.Ctx, todo)
+	q, ctx := util.GetDBSession(c)
+
+	newTodo, err := q.NewTodo(ctx, todo)
 	if err != nil {
 		return c.NoContent(http.StatusInternalServerError)
 	}
@@ -53,7 +55,9 @@ func DeleteTodoById(c echo.Context) error {
 		ID:     int32(id),
 	}
 
-	err = global.Q.DeleteTodoById(global.Ctx, delTodo)
+	q, ctx := util.GetDBSession(c)
+
+	err = q.DeleteTodoById(ctx, delTodo)
 	if err != nil {
 		return c.NoContent(http.StatusInternalServerError)
 	}
@@ -74,7 +78,9 @@ func ToggleTodoById(c echo.Context) error {
 		ID:     int32(id),
 	}
 
-	done, err := global.Q.ToggleUserTodo(global.Ctx, toggleTodo)
+	q, ctx := util.GetDBSession(c)
+
+	done, err := q.ToggleUserTodo(ctx, toggleTodo)
 	if err != nil {
 		return c.NoContent(http.StatusInternalServerError)
 	}

@@ -28,7 +28,9 @@ func PostLogin(c echo.Context) error {
 		return util.LoginWithMessage("Password can't be empty", c)
 	}
 
-	user, err := global.Q.GetUserData(global.Ctx, username)
+	q, ctx := util.GetDBSession(c)
+
+	user, err := q.GetUserData(ctx, username)
 	if err != nil {
 		return util.LoginWithMessage(fmt.Sprintf("User: \"%s\" does not exist", username), c)
 	}

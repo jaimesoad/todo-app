@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 	sqlc "todolist/pkg/db"
+	mid "todolist/pkg/middleware"
 	"todolist/pkg/model"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -62,4 +63,10 @@ func GetSessionUser(c echo.Context) model.SessionUser {
 		Username: claims.Username,
 		Id:       claims.Id,
 	}
+}
+
+func GetDBSession(c echo.Context) (*sqlc.Queries, context.Context) {
+	db := c.Get("db").(mid.DBConfig)
+
+	return db.Conn, db.Ctx
 }
